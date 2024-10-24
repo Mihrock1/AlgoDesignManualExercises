@@ -9,6 +9,17 @@ of the first oﬀending parenthesis if the string is not properly nested and bal
 from collections import deque
 from typing import Union
 
+# Steps to detect balanced parentheses:
+# 1. Check if the input string contains only '(' and ')' characters, otherwise raise a ValueError.
+# 2. Initialize a stack to keep track of the indices of unmatched '('.
+# 3. Iterate through the string:
+#    - If the character is '(', push its index onto the stack.
+#    - If the character is ')', check if there's a matching '(' in the stack:
+#      - If so, pop the stack (match found).
+#      - If not, return False along with the index of the unbalanced ')'.
+# 4. After iteration, check if the stack is empty:
+#    - If not, return False with the index of the remaining unmatched '('.
+#    - If empty, return True (balanced) with None.
 def balanced_parentheses_detection(string: str) -> (bool, Union[int, None]):
     if not all(char in '()' for char in string):
         raise ValueError("Input can only be rounded parentheses: '(' or ')'")
@@ -27,23 +38,6 @@ def balanced_parentheses_detection(string: str) -> (bool, Union[int, None]):
         return False, i
     else:
         return True, None
-
-# def balanced_parentheses_detection_Alt(string: str) -> (bool, Union[int, None]):
-#     if not all(char in '()' for char in string):
-#         raise ValueError("Input can only be rounded parentheses: '(' or ')'")
-#
-#     count = 0
-#     for i, char in enumerate(string):
-#         if char == '(':
-#             count += 1
-#         else:
-#             count -= 1
-#
-#         if count < 0:
-#             return False, i
-#
-#     if count == 0:
-#         return True, None
 
 
 
